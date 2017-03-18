@@ -1,0 +1,212 @@
+
+<dialog id="editrekammedik" class="mdl-dialog newModal" >
+     <button class="mdl-button mdl-js-button mdl-button--icon modal_button" ng-click="hideDialog('editrekammedik')">
+      <i class="material-icons">close</i>
+    </button>
+    <div class="modal__modal" >
+     <h2 class="g-modal-title-h1 sc-truncate">Edit Rekam Medik</h2>
+
+     <div class="profileSettings__form">
+       <div class="sc-media">
+          <div class="profileSettings__baseFields sc-media-content">
+
+            <div class="profileSettings__cell">
+                <div class="textfield messageOutside">
+                   <label>
+                    <span class="textfield__label g-required-label">Tanggal Pemeriksaan</span>
+
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield" >
+                            <input class="mdl-textfield__input" type="date" id="sample1" ng-model="editTanggal"  style="margin-top:-4px;">
+                             <label class="mdl-textfield__label" for="sample1"></label>
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+           <div class="profileSettings__cell">
+                <div class="textfield messageOutside">
+                   <label>
+                      <span class="textfield__label g-required-label">Klinik</span>
+                      <div class="textfield__inputWrapper" style="margin-top: 14px;">
+                            <ui-select ng-model="country.selected" theme="selectize" ng-disabled="disabled">
+                              <ui-select-match placeholder="Pilih atau cari klinik berdasarkan nama...">{{$select.selected.nama}}</ui-select-match>
+                              <ui-select-choices repeat="country in listofKlinik | filter: $select.search">
+                               <span ng-bind-html="country.nama | highlight: $select.search"></span>
+                              </ui-select-choices>
+                            </ui-select>       
+                      </div>
+                  </label>
+      
+                </div>
+            </div>
+            <div class="profileSettings__cell">
+                <div class="textfield messageOutside">
+                   <label>
+                      <span class="textfield__label g-required-label">Dokter</span>
+                      <div class="textfield__inputWrapper" style="margin-top: 14px;">
+                        <ui-select ng-model="country.selected" theme="selectize" ng-disabled="disabled">
+                          <ui-select-match placeholder="Pilih atau cari dokter berdasarkan nama...">{{$select.selected.nama}}</ui-select-match>
+                          <ui-select-choices repeat="country in listofDokter | filter: $select.search">
+                           <span ng-bind-html="country.nama | highlight: $select.search"></span>
+                          </ui-select-choices>
+                        </ui-select>       
+                      </div>
+                  </label>
+      
+                </div>
+            </div>
+              <div class="profileSettings__cell">
+                <div class="textfield messageOutside">
+                   <label>
+                    <span class="textfield__label g-required-label">Keluhan</span>
+
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield " >
+                            <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Keluhan" ng-model="pasienedit.profile.email" >
+                            <label class="mdl-textfield__label" for="sample1"></label>
+                           
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+ 
+            <div class="profileSettings__cell  m-fullWidth">
+                <div class="textfield messageOutside">
+                   <label>
+                    <span class="textfield__label g-required-label">Pemeriksaan</span>
+
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield m-fullWidth" >
+                            <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Pemeriksaan" ng-model="pasienedit.profile.nomor_telp">
+                            <label class="mdl-textfield__label" for="sample1"></label>
+                           
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+                    <div class="profileSettings__cell  m-fullWidth">
+                <div class="textfield messageOutside">
+                   <label>
+                    <span class="textfield__label g-required-label">Pemeriksaan Lanjutan</span>
+
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield m-fullWidth" >
+                            <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Pemeriksaan Lanjutan" ng-model="pasienedit.profile.nomor_telp">
+                            <label class="mdl-textfield__label" for="sample1"></label>
+                            
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+                  <div class="profileSettings__cell  m-fullWidth">
+                <div class="textfield messageOutside">
+                   <label>
+                    <span class="textfield__label g-required-label">Diagnosa</span>
+
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield m-fullWidth" >
+                            <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Diagnosa" ng-model="pasienedit.profile.nomor_telp">
+                            <label class="mdl-textfield__label" for="sample1"></label>
+                           
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+
+                 <div class="profileSettings__cell m-fullWidth">
+                <div class="textfield messageOutside">
+                   <label>
+                    <span class="textfield__label g-required-label">Kesimpulan</span>
+
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield m-fullWidth" >
+                            <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Kesimpulan" ng-model="pasienedit.profile.nomor_telp">
+                            <label class="mdl-textfield__label" for="sample1"></label>
+                           
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+
+                  <div class="profileSettings__cell">
+                <div class="textfield messageOutside">
+                   <label>
+                    <span class="textfield__label g-required-label">Obat</span>
+
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield" >
+                            <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Obat" ng-model="pasienedit.profile.nomor_telp">
+                            <label class="mdl-textfield__label" for="sample1"></label>
+                            <span class="mdl-textfield__error">Masukkan nomor telepon dengan benar</span>
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+
+          
+               <div class="profileSettings__cell">
+                <div class="textfield messageOutside">
+                   <label>
+                    <span class="textfield__label g-required-label">Kondisi</span>
+
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield" >
+                            <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Kondisi" ng-model="pasienedit.profile.nomor_telp">
+                            <label class="mdl-textfield__label" for="sample1"></label>
+                            
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+
+          </div>
+       </div>
+
+       <div class="profileSettings__formButtons sc-button-toolbar sc-border-light-top">
+          
+          <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="color:red;" ng-click="hideDialog('editrekammedik')">
+             Batal
+          </button>
+           <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="">
+            <div ng-show="showspin" class="mdl-spinner mdl-js-spinner is-active" ></div><div ng-show="!showspin"> Simpan Perubahan</div>
+          </button>
+       </div>
+
+     </div>
+
+    </div>
+
+</dialog>
+

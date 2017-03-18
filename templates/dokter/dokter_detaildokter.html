@@ -1,0 +1,51 @@
+
+
+<div id="content" ng-init="changejud('Detail Dokter');setsearchnull();numron=getRandomNum();" ng-class="{'bgklinik1':numron==1,'bgklinik2':numron==2,'bgklinik3':numron==3,'bgklinik4':numron==4,'bgklinik5':numron==5,'bgklinik6':numron==6,'bgklinik7':numron==7,'bgklinik8':numron==8,'bgklinik9':numron==9,'bgklinik10':numron==10}">
+        <div id="profile-info">
+        
+          <img  id="profile-image"  ng-src="{{tampungdokter.photo || 'img/doctor-flat.png'}}" ng-click="openimageprofile(tampungdokter.nama,tampungdokter.photo)" style="cursor:pointer;">
+          
+          
+          <h5 id="profile-name" ng-if="tampungdokter.spesialis != 'Dokter Gigi'">dr. {{tampungdokter.nama}}</h5>
+          <h5 id="profile-name" ng-if="tampungdokter.spesialis == 'Dokter Gigi'">drg. {{tampungdokter.nama}}</h5>
+          <p id="profile-name2" ng-show="tampungdokter.kelamin == 'P'">Perempuan</p>
+         <p id="profile-name2" ng-show="tampungdokter.kelamin == 'L'">Laki - Laki</p>
+          <p ng-if="tampungdokter.alamat" id="profile-name3">{{tampungdokter.alamat}}</p>
+          <p ng-if="tampungdokter.spesialis" id="profile-name3">{{tampungdokter.spesialis}}</p>
+          <p ng-if="tampungdokter.nomor_telp" id="profile-name3">{{tampungdokter.nomor_telp}}</p>
+          <p id="profile-name3">{{tampungdokter.email}}</p>
+       
+
+        </div>
+         
+</div>
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect opacityanimate">
+  <div class="mdl-tabs__tab-bar">
+    
+       <a href="#jadwal-panel" class="mdl-tabs__tab is-active">Jadwal praktek</a>
+  </div>
+
+    <div class="mdl-tabs__panel is-active" id="jadwal-panel">
+      <div class="mdl-grid demo-content" >
+           
+              <div class="list mdl-cell mdl-cell--3-col " ng-repeat="day in tampungdokter.listjadwal" >
+
+              <a class="item " href="" ng-click="" ng-class="{'backcolored' : day.start&&day.end}">
+                <h2 style="margin:auto;font-size:20px;text-align: center;" ng-init="indoday=getindoday(day.hari)">{{indoday}}</h2>
+                <p style="margin:auto;text-align: center;">{{day.start | date: "HH:mm" }} - {{day.end | date: "HH:mm"}}</p>
+              </a>
+              
+             </div>  
+      </div>
+  </div>
+
+</div>
+
+<!--edit rekam medik -->
+
+
+
+
+
+
+

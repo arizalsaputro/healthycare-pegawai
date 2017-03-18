@@ -1,0 +1,162 @@
+ <div class="mdl-grid demo-content" ng-init="changejud('Pembayaran')">
+        <div ng-if="listbayar[0] == null && showsnackbar" id="loadiing" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+          
+          <div ng-if="listbayar[0] == null && !showsnackbar" id="loadiing">
+           <i  class="material-icons" style="font-size:1000%;">desktop_windows</i>
+           <p style="text-align:center;">Pembayaran Kosong</p>
+         </div>
+ </div>
+   <div class="mdl-grid demo-content" ng-repeat="bayar in listbayar | filter:search" >
+    
+         <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing" >
+              <div class="dashperiksa mdl-color--white" style="border: 1px solid #e1e8ed;">
+                  <div ng-init="numron=getRandomNum();" class="bannerner" ng-class="{'bgklinik1':numron==1,'bgklinik2':numron==2,'bgklinik3':numron==3,'bgklinik4':numron==4,'bgklinik5':numron==5,'bgklinik6':numron==6,'bgklinik7':numron==7,'bgklinik8':numron==8,'bgklinik9':numron==9,'bgklinik10':numron==10}"> 
+                  </div>
+                  <div class="profile-periksa">
+                      <div class="item item-thumbnail-left" style="border:none;background-color:transparent;z-index:0;">
+                        <img id="imgpro" ng-src="{{allUser.$getRecord(bayar.pasien).profile.photo}}" style="margin-top:-38px;cursor: pointer;" ng-click="openimageprofile(datapasienperiksa.nama,datapasienperiksa.photo)">
+                        <h2 style="margin: -20px 0 9px 0;font-size: 20px;text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">{{allUser.$getRecord(bayar.pasien).profile.nama || 'Tidak ada pasien'}}</h2>
+                        <p style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">{{allUser.$getRecord(bayar.pasien).profile.alamat || allUser.$getRecord(bayar.pasien).profile.email}}</p>
+                        <p ng-if="listAsuransi.$getRecord(allUser.$getRecord(bayar.pasien).regis.asuransi).nama" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">{{listAsuransi.$getRecord(allUser.$getRecord(bayar.pasien).regis.asuransi).nama || '-'}} - {{allUser.$getRecord(bayar.pasien).regis.nopeserta}} <span>
+                          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                            <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                            <span class="mdl-checkbox__label"></span>
+                          </label>
+                        </span></p>
+                      </div>
+                  </div>
+                     <div class="menu-profile" style="margin-top: -27px;">
+                       <div class="mdl-tabs__tab-bar" style="border:none;">
+                           <button class="mdl-button mdl-js-button mdl-js-ripple-effect " ng-click="savetransaksi(bayar,getTotal(bayar.item),allUser.$getRecord(bayar.pasien).regis.klinik,bayar);printDiv(bayar.$id);" >
+                                Cetak Kwitansi
+                            </button>
+                      </div>
+                    </div>
+              </div>    
+          </div>  
+
+          <div class="demo-graphs mdl-color--white mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet" style="border: 1px solid #e1e8ed;">
+            <div class="form_profile_info" >
+
+              <div  class="resi_pembayaran" id="{{bayar.$id}}">
+                  <h2 class="g-modal-title-h1 sc-truncate" style="border-bottom:0px solid red;">Kwitansi</h2>
+
+                  <div style="width:100%;border-bottom:2px solid red;">
+                   <div style="padding-bottom:5px;">
+                     <table>
+                      <tr>
+                        <td>Tanggal periksa</td>
+                        <td>:</td>    
+                        <td class="foroverflow">{{bayar.tgl | date:"longDate" || 'kosong'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Nama Pasien</td>
+                        <td>:</td>    
+                        <td class="foroverflow">{{allUser.$getRecord(bayar.pasien).profile.nama}}</td>
+                      </tr>
+                      <tr>
+                        <td>Alamat Pasien</td>
+                        <td>:</td>    
+                        <td class="foroverflow">{{allUser.$getRecord(bayar.pasien).profile.alamat}}</td>
+                      </tr>
+                    </table>
+
+                  </div>
+                    <div style="float:right;margin-top: -77px;">
+                      <table>
+                      <tr>
+                        <td>Poli</td>
+                        <td>:</td>    
+                        <td class="foroverflow">{{listofKlinik.$getRecord(allUser.$getRecord(bayar.pasien).regis.klinik).nama}}</td>
+                      </tr>
+                      <tr>
+                        <td>Dokter</td>
+                        <td>:</td>    
+                        <td class="foroverflow">{{listofDokter.$getRecord(bayar.dktr).nama}}</td>
+                      </tr>
+                      <tr>
+                       <td>Asuransi</td>
+                        <td>:</td>    
+                        <td class="foroverflow">{{listAsuransi.$getRecord(allUser.$getRecord(bayar.pasien).regis.asuransi).nama || '-'}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                  </div>                 
+                  <table class="mdl-data-table mdl-js-data-table  table_rekam_medik table" style="border:none;">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">No</th>
+                        <th class="mdl-data-table__cell--non-numeric" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">Transaksi</th>
+                        <th class="" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">qty</th>
+                        <th class="" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">disc</th>
+                        <th class="" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">jumlah</th>
+                 
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="item in bayar.item">
+                        <td class="mdl-data-table__cell--non-numeric foroverflow" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">{{$index+1}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{item[0]}}</td>
+                        <td class="foroverflow" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">1</td>
+                        <td class="foroverflow" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">0</td>
+                        <td class="foroverflow" style="text-overflow: ellipsis;white-space: nowrap;overflow:hidden;">{{item[1] | currency:"Rp.":0}}</td>
+    
+                      </tr>
+                      <tr>
+                        <td style="border:none"></td>
+                         <td style="border:none"></td>
+                          <td style="border:none"></td>
+                           <td class="mdl-data-table__cell--non-numeric" style="border:none">Subtotal</td>
+                            <td style="border:none">{{getTotal(bayar.item) | currency:"Rp.":0}}</td>
+                      </tr>
+                      <tr >
+                        <td style="border:none"></td>
+                         <td style="border:none"></td>
+                          <td style="border:none"></td>
+                           <td class="mdl-data-table__cell--non-numeric" style="border:none">Discount</td>
+                            <td style="border:none">0</td>
+                      </tr>
+                       <tr >
+                        <td></td>
+                         <td></td>
+                          <td></td>
+                           <td class="mdl-data-table__cell--non-numeric">Total</td>
+                            <td>{{getTotal(bayar.item) | currency:"Rp.":0}}</td>
+                      </tr>
+
+                     <tr >
+                        <td style="border:none"></td>
+                         <td style="border:none"></td>
+                          <td style="border:none"></td>
+                           <td class="mdl-data-table__cell--non-numeric" style="border:none"></td>
+                            <td style="border:none"></td>
+                      </tr>
+                      <tr >
+                        <td style="border:none"></td>
+                         <td style="border:none"></td>
+                          <td style="border:none"></td>
+                           <td class="mdl-data-table__cell--non-numeric" style="border:none"></td>
+                            <td style="border:none"></td>
+                      </tr >
+                           <tr>
+                        <td style="border:none"></td>
+                         <td style="border:none"></td>
+                          <td style="border:none"></td>
+                           <td class="mdl-data-table__cell--non-numeric" style="border:none"></td>
+                            <td style="border:none">{{dataprofile.nama}}</td>
+                      </tr>
+
+                    </tbody>
+                    </table>
+            
+              </div>
+
+            </div>
+          </div>
+
+
+  </div>
+
+
+

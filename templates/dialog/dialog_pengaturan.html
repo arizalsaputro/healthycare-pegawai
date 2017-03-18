@@ -1,0 +1,31 @@
+<dialog id="pengaturan" class="mdl-dialog newnewmodal" >
+     <button class="mdl-button mdl-js-button mdl-button--icon modal_button" ng-click="hideDialog('pengaturan')">
+      <i class="material-icons">close</i>
+    </button>
+    <div class="backdrop" ng-click="hideDialog('pengaturan')">
+    </div>
+    <div class="modal__modal" style="width: 300px;">
+     <h2 class="g-modal-title-h1 sc-truncate">Pengaturan</h2>
+
+     <div class="profileSettings__form">
+       <div class="sc-media">
+           <div class="menu-profile">
+                 <div class="mdl-tabs__tab-bar" style="border:none;">
+                   <button class="mdl-button mdl-js-button mdl-button--primary" style="width:100%;font-weight: normal;text-transform: none;text-align:left" ng-click="showDialog('anakdialogreset');hideDialog('pengaturan')">
+                     <i class="material-icons iconbutton" style="padding-right:22px">restore</i>
+                    Reset semua antrian
+                  </button>
+              </div>
+            </div>
+       </div>
+
+     
+     </div>
+
+    </div>
+
+</dialog>
+
+
+
+

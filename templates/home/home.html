@@ -1,0 +1,56 @@
+<div class="mdl-grid demo-content" ng-init="changejud('Analytics')">
+          <div class="demo-charts mdl-color--white mdl-cell mdl-cell--12-col mdl-grid" style="border: 1px solid #e1e8ed;">
+             <div class="list mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet"  >
+              <a class="item item-thumbnail-left" style="background-color:#FA7975;color: #fff;">
+                <img  ng-src="img/klinik.png">
+                <h2 style="margin: 8px 0 9px 0;
+    font-size: 42px;
+    font-weight: normal;">{{listofKlinik.length}}</h2>
+                <p style="margin-top: -14px;color:#fff;">Jumlah klinik </p>
+              </a>
+            </div>
+
+              <div class="list mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet"  >
+              <a class="item item-thumbnail-left" style="background-color:#F1B428;color: #fff;">
+                <img  ng-src="img/doctor-flat.png">
+                <h2 style="margin: 8px 0 9px 0;
+    font-size: 42px;
+    font-weight: normal;">{{listofDokter.length}}</h2>
+                <p style="margin-top: -14px;color:#fff;">Jumlah dokter </p>
+              </a>
+            </div>
+
+             <div class="list mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet"  >
+              <a class="item item-thumbnail-left" style="background-color:#2174FC;color: #fff;">
+                <img  ng-src="img/person-flat.png">
+                <h2 style="margin: 8px 0 9px 0;
+    font-size: 42px;
+    font-weight: normal;">{{allUser.length}}</h2>
+                <p style="margin-top: -14px;color:#fff;">Jumlah pasien</p>
+              </a>
+            </div>
+
+
+             <div class="list mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet"  >
+              <a class="item item-thumbnail-left" style="background-color:#57D3A1;color: #fff;">
+                <img  ng-src="img/shield-flat.png">
+                <h2 style="margin: 8px 0 9px 0;
+    font-size: 42px;
+    font-weight: normal;">{{listAsuransi.length}}</h2>
+                <p style="margin-top: -14px;color:#fff;">Jumlah Asuransi</p>
+              </a>
+            </div>
+
+          </div>
+
+
+
+          <div class="demo-graphs mdl-color--white mdl-cell mdl-cell--12-col" style="border: 1px solid #e1e8ed;">
+           <h5>Registrasi setiap klinik</h5>
+           <canvas id="bar1" class="chart chart-bar"
+            chart-data="data1" chart-labels="labels" >
+          </canvas>
+
+          </div>
+        
+        </div>

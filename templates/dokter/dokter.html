@@ -1,0 +1,40 @@
+
+<style>
+.demo-updates > .mdl-card__menu {
+  color: #fff;
+}
+</style>
+
+
+<div class="mdl-grid demo-content" ng-init="changejud('Data Semua Dokter')">
+        <div ng-if="listofDokter[0] == null && showsnackbar" id="loadiing" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+          <div ng-if="listofDokter[0] == null && !showsnackbar" id="loadiing">
+           <i  class="material-icons" style="font-size:1000%;">desktop_windows</i>
+           <p style="text-align:center;">Data Dokter Kosong</p>
+         </div>
+    
+          <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet" ng-repeat="dokter in listofDokter | filter:search | orderBy:'spesialis' | startFrom:currentPage*pageSize | limitTo:pageSize" >
+
+              <a class="item item-thumbnail-left" href="#/dash/dokter/detail" ng-click="tampungdetail(dokter,2);changejud('Detail Dokter')" >
+                <img  ng-src="{{dokter.photo || 'img/doctor-flat.png'}}">
+                <h2 ng-if="dokter.spesialis != 'Dokter Gigi'" class="foroverflow">dr. {{dokter.nama}}</h2>
+                 <h2 ng-if="dokter.spesialis == 'Dokter Gigi'" class="foroverflow">drg. {{dokter.nama}}</h2>
+                <p class="foroverflow">{{dokter.spesialis}}</p>
+                <p class="foroverflow">{{dokter.nomor_telp || dokter.email}}</p>
+              </a>
+              
+          </div>
+     
+        
+ </div>
+ <div ng-if="listofDokter[0] != null && !showsnackbar && getData().length >=15" class="button-pag">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-disabled="currentPage == 0" ng-click="prev()">
+          sebelumnya
+        </button>
+         <span class="pag-span">Halaman {{currentPage+1}} dari {{numberOfPages()}}</span>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="nexti()" ng-disabled="currentPage >= getData().length/pageSize - 1">
+          berikutnya
+        </button>
+  </div>
+
+

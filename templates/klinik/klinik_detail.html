@@ -1,0 +1,52 @@
+
+
+<div id="content" ng-init="changejud('Detail Klinik');setsearchnull();numron=getRandomNum();" ng-class="{'bgklinik1':numron==1,'bgklinik2':numron==2,'bgklinik3':numron==3,'bgklinik4':numron==4,'bgklinik5':numron==5,'bgklinik6':numron==6,'bgklinik7':numron==7,'bgklinik8':numron==8,'bgklinik9':numron==9,'bgklinik10':numron==10}">
+        <div id="profile-info">
+        
+          <img id="profile-image" ng-src="{{tampungklinik.gambar || 'http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Bed-icon.png'}}" ng-click="openimageprofile(tampungklinik.nama,tampungklinik.gambar)" style="cursor:pointer;">
+      
+
+          <h5 id="profile-name">Klinik {{tampungklinik.nama}}</h5>
+         
+          <p id="profile-name3">{{tampungklinik.desc}}</p>
+    
+
+        </div>
+        
+</div>
+
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect opacityanimate">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#lannisters-panel" class="mdl-tabs__tab is-active">Dokter</a>
+  </div>
+
+
+  <div class="mdl-tabs__panel is-active" id="lannisters-panel">
+      <div class="mdl-grid demo-content">
+           
+           
+          <div class="list mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet" ng-repeat="dokter in listofDokter | filter:search " ng-if="checkshowdokter(dokter.$id,tampungklinik.listdokter)">
+
+              <a class="item item-thumbnail-left" href="#/dash/dokter/detail" ng-click="tampungdetail(dokter,2);changejud('Detail Dokter')" >
+                <img  ng-src="{{dokter.photo || 'img/doctor-flat.png'}}">
+                <h2 ng-if="dokter.spesialis != 'Dokter Gigi'">dr. {{dokter.nama}}</h2>
+                 <h2 ng-if="dokter.spesialis == 'Dokter Gigi'">drg. {{dokter.nama}}</h2>
+                <p>{{dokter.spesialis}}</p>
+                <p>{{dokter.nomor_telp || dokter.email}}</p>
+              </a>
+              
+          </div>
+     
+      </div>
+  </div>
+
+</div>
+
+
+
+<!--edit rekam medik -->
+
+
+
+
+

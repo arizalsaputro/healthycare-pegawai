@@ -1,0 +1,102 @@
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">{{judul}}</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search" ng-model="search" ng-change="setCari(search)">
+              <label class="mdl-textfield__label" for="search">Masukkan kata kunci</label>
+            </div>
+          </div>
+           <div ng-show="panjangnot != 0" click-anywhere-but-here="shownotifbox=false" ng-click="makenotification()"  class="material-icons mdl-badge mdl-badge--overlap" data-badge="{{panjangnot}}" style="cursor: pointer;">notifications</div>
+           <div ng-show="panjangnot == 0" click-anywhere-but-here="shownotifbox=false" ng-click="makenotification()"  class="material-icons mdl-badge mdl-badge--overlap"  style="cursor: pointer;">notifications_none</div>
+          <div ng-if="shownotifbox" id="notificationContainer">
+             <div id="notificationTitle">Pemberitahuan</div>
+               <div id="notificationsBody" class="notifications" click-anywhere-but-here="shownotifbox=true">
+                    <div class="list" ng-repeat="notif in listnotif | orderBy:'':true" >
+
+                      <a href="" class="item item-thumbnail-left" >
+                        <img ng-src="{{ listofDokter.$getRecord(notif.photo).photo ||'img/doctor-flat.png'}}">
+                        <h2 class="foroverflow">{{notif.dok}}</h2>
+                        <p class="foroverflow">{{notif.ket}}</p>
+                         <p class="foroverflow">{{notif.tmp | date:"H:mm"}}</p>
+                          <label class="mdl-button mdl-js-button mdl-button--icon hapussingle" ng-click="hapusSinglenotif(notif)">
+                          <i class="material-icons">close</i>
+                        </label>
+                      </a>
+                      
+                  </div>
+              </div>
+             <div id="notificationFooter"><a href="" ng-click="hapussemuanotif();shownotifbox=false">Hapus Semua</a></div>
+          </div>    
+        </div>
+      </header>
+
+
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <img ng-click="openprofile()" ng-src="{{dataprofile.photo || 'img/pegawai.png'}}" class="demo-avatar" style="cursor:pointer;" title="profile">
+          <div class="demo-avatar-dropdown">
+            <span>{{dataprofile.nama}}</span>
+            <div class="mdl-layout-spacer"></div>
+            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" title="opsi">
+              <i class="material-icons" role="presentation">arrow_drop_down</i>
+              <span class="visuallyhidden">Accounts</span>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+               <li class="mdl-menu__item" ng-click="clickOutapp()"><i class="mdl-color-text--blue-grey-400 material-icons" style="padding-right: 6px;">exit_to_app</i>Keluar</li>
+            </ul>
+          </div>
+        </header>
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href="#/dash/registrasi
+          "><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Registasi</a>
+          <a class="mdl-navigation__link" href="" ng-click="openonsite()"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Registrasi Onsite</a>
+             <a class="mdl-navigation__link" href="#/dash/pasien" ng-click="changejud('Data Semua Pasien')"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Data Pasien</a>
+            <a class="mdl-navigation__link" href="#/dash/pembayaran" ng-click="changejud('Pembayaran')"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">payment</i><span class="mdl-badge" data-badge="{{listbayar.length}}" ng-if="listbayar.length != 0">Pembayaran</span><span ng-if="listbayar.length == 0">Pembayaran</span></a>
+          <a class="mdl-navigation__link" href="#/dash/klinik"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_hospital</i>Klinik</a>
+         <a class="mdl-navigation__link" href="#/dash/dokter" ng-click="changejud('Data Semua Dokter')"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Data Dokter</a>
+          <a class="mdl-navigation__link" href="#/dash/asuransi" ng-click="changejud('Asuransi')"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">account_balance_wallet</i>Asuransi</a>
+          <a class="mdl-navigation__link" href="#/dash/home" ng-click="changejud('Analytics')"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">equalizer</i>Analytics</a>
+          <a class="mdl-navigation__link" href="" ng-click="showDialog('pengaturan')"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Pengaturan</a>
+        </nav>
+      </div>
+     <!--<div ui-view name="menuContent"></div>-->
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="no-internet" ng-show="showsnackbar ">
+            <p>Tidak terkoneksi dengan jaringan internet.</p>
+          </div>
+        <div ui-view name="tab-dash"></div>
+        
+      </main>
+  
+    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar" style="right:0px;bottom:40px;">
+      <div class="mdl-snackbar__text"></div>
+     <button class="mdl-snackbar__action" type="button"></button> 
+    </div>
+
+
+<div ng-include src="'templates/dialog/dialogberhasil.html'" ></div>
+<div ng-include src="'templates/dialog/admin_keluarapp.html'" ></div>
+<div ng-include src="'templates/dialog/dialog_pengaturan.html'" ></div>
+<div ng-include src="'templates/dialog/pasien_tambahpasien.html'" ></div>
+<div ng-include src="'templates/dialog/pasien_editrekammedik.html'" ></div>
+<div ng-include src="'templates/dialog/pasien_lihatpass.html'" ></div>
+<div ng-include src="'templates/dialog/pasien_ubahpasswordpas.html'" ></div>
+<div ng-include src="'templates/dialog/pasien_ubahemailpasien.html'" ></div>
+<div ng-include src="'templates/dialog/pasien_ubahprofilepasien.html'" ></div>
+<div ng-include src="'templates/dialog/pasien_hapuspasien.html'" ></div>
+<div ng-include src="'templates/dialog/loading.html'" ></div>
+<div ng-include src="'templates/asuransi/asuransi_detail.html'" ></div>
+<div ng-include src="'templates/dialog/dialog_image.html'" ></div>
+<div ng-include src="'templates/pasien/pasien_addrekam.html'" ></div>
+<div ng-include src="'templates/dialog/profile_edit.html'" ></div>
+<div ng-include src="'templates/dialog/profile_ubahemail.html'" ></div>
+<div ng-include src="'templates/dialog/profile_password.html'" ></div>
+<div ng-include src="'templates/dialog/register_onsite.html'" ></div>
+<div ng-include src="'templates/dialog/register_sukses.html'" ></div>
+<div ng-include src="'templates/dialog/dialog_confirm.html'" ></div>

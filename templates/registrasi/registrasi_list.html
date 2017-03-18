@@ -1,0 +1,47 @@
+<dialog id="daftarantrian" class="mdl-dialog newModal" >
+     <button class="mdl-button mdl-js-button mdl-button--icon modal_button" ng-click="hideDialog('daftarantrian')">
+      <i class="material-icons">close</i>
+    </button>
+    <div class="modal__modal" style="width:80%;">
+     <h2 class="g-modal-title-h1 sc-truncate">Antrian Klinik {{namakli}}  <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="showDialog('resetantrian')">
+           Reset Antrian
+        </button></h2>
+     <div class="profileSettings__form">
+       <div class="sc-media">
+          <div class="profileSettings__baseFields sc-media-content">
+                 <div class="profileSettings__cell m-fullWidth">
+                <div class="textfield messageOutside">
+                   <label>
+                    
+                      <div class="textfield__inputWrapper">
+                          <div class="mdl-textfield mdl-js-textfield" style="width:100%;">
+
+                            <input class="mdl-textfield__input" type="text" id="sample1" placeholder="cari" ng-model="cari">
+                            <label class="mdl-textfield__label" for="sample1"></label>
+                            
+                          </div>
+                          
+                      </div>
+
+                  </label>
+      
+                </div>
+            </div>
+              <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet" ng-repeat="antrian in listklinikantrian.listRegister | filter:cari ">
+              <a class="item item-thumbnail-left " href="" ng-click="" ng-class="{'redcolored' : antrian.nomor_antrian<=listklinikantrian.regis+1}">
+                <div class="nomorlist">{{antrian.nomor_antrian}}</div>
+                 <h2 class="nomorlist2">{{getNamapasien(antrian.idpasien)}}</h2>
+                <p class="nomorlist2">{{getAlamatpasien(antrian.idpasien)}}</p>
+                <p class="nomorlist2">{{gettelppasien(antrian.idpasien)}}</p>
+              </a>
+              
+             </div>
+
+          </div>
+       </div>
+
+     </div>
+
+    </div>
+
+</dialog>

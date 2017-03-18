@@ -1,0 +1,147 @@
+<style>
+.demo-card-event.mdl-card {
+
+
+  background: #8BC34A;
+}
+.demo-card-event > .mdl-card__actions {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.demo-card-event > .mdl-card__title {
+  align-items: flex-start;
+}
+.demo-card-event > .mdl-card__title > h4 {
+  margin-top: 0;
+}
+.demo-card-event > .mdl-card__actions {
+  display: flex;
+  box-sizing:border-box;
+  align-items: center;
+}
+.demo-card-event > .mdl-card__actions > .material-icons {
+  padding-right: 10px;
+}
+.demo-card-event > .mdl-card__title,
+.demo-card-event > .mdl-card__actions,
+.demo-card-event > .mdl-card__actions > .mdl-button {
+  color: #fff;
+}
+
+.nameklinik{
+  border-bottom: 3px solid #F44336;
+}
+.nameklinik-2{
+  border-bottom: 3px solid #3F51B5;
+}
+.nameklinik h4{
+  margin: 0;
+}
+
+.btnanext{
+  position: absolute;
+  right: 2%;
+  top:67%;
+  z-index: 999;
+}
+.infojum{
+  position: absolute;
+  top:2%;
+  right: 1%;
+}
+
+.btn-input{
+  cursor: pointer;
+  border:none;
+  outline: none;
+}
+
+
+
+</style>
+
+
+<div class="mdl-grid demo-content" ng-init="changejud('Registrasi')">
+         <div ng-if="listofKlinik[0] == null && showsnackbar" id="loadiing" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div> 
+            <div ng-if="listofKlinik[0] == null && !showsnackbar" id="loadiing">
+           <i  class="material-icons" style="font-size:1000%;">desktop_windows</i>
+           <p style="text-align:center;">Data Registrasi Kosong</p>
+
+         </div>
+         
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet " ng-repeat="klinik in listantrian " ng-if="getdokter(klinik).nama">
+                         
+                          <a class="item ">
+                             <div class="nameklinik" ng-init="showdok=false">
+                              <h4 >Klinik {{getNamekli(klinik.$id)}} 
+                              <span>
+                               <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" title="lihat dokter yang jaga sekarang" ng-click="showdok = !showdok">
+                                <i class="material-icons">arrow_drop_down</i>
+                              </button>
+                              </span>
+                              </h4> 
+                              <span ng-if="showdok" class="dokterantrian opacityanimate" ng-click="gotodetaildokterr(getdokter(klinik))">{{getdokter(klinik).nama || 'tidak ada dokter'}}</span>
+                            </div>
+                               <div class="infojum" >
+                                <button id="{{$index}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color:#F44336;" ng-click="openlistantrian(getNamekli(klinik.$id),klinik)" title="buka untuk melihat opsi lainya">
+                              {{klinik.listRegister.length-(klinik.regis+1) || 0}}
+                            </button>
+                               <div class="mdl-tooltip" for="{{$index}}">
+                                             Total pendaftar
+                                   </div>
+                            </div>
+                            
+                            <div class="mdl-grid nameklinik-2 opacityanimate" id="berlangsung" ng-class="{'redcolored':klinik.listRegister[klinik.regis].s}" >
+                              <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet" >
+                                <h1 style="text-align:center;font-size:60px;color:#6200EA;margin:0;" class="nomorlist2" title="antrian saat ini">{{klinik.listRegister[klinik.regis].nomor_antrian || 0}}</h1>
+                              </div>
+
+                              <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet" >
+                                  <h2 style="font-weight:normal;font-size:16px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" class="nomorlist2 foroverflow" >{{getNamapasien(klinik.listRegister[klinik.regis].idpasien)}}</h2>
+                                  <p class="nomorlist2 foroverflow">{{getAlamatpasien(klinik.listRegister[klinik.regis].idpasien)}}</p>
+                                  <p class="nomorlist2 foroverflow">{{gettelppasien(klinik.listRegister[klinik.regis].idpasien)}}</p>
+                              </div>
+                            </div>
+                            
+                           
+                            <div class="mdl-grid nameklinik-2 opacityanimate" id="selanjutnya" >
+                              <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet" >
+                                <div class="btn-input mdl-js-button" id="{{$index + klinik.$id}}" ng-click="lakukanpemeriksaan(klinik,klinik.listRegister[klinik.regis+1].idpasien)" title="Kirimkan pasien ke dokter jika pasien ada">
+                                    <h1 ng-show="!klinik.periksa" style="text-align:center;font-size:60px;color:#6200EA;margin:0;" >{{klinik.listRegister[klinik.regis+1].nomor_antrian || 0}}</h1>
+                                     
+                                </div>
+                                 <div class="mdl-tooltip" for="{{$index + klinik.$id}}">
+                                              periksa pasien
+                                   </div>
+                              </div>
+
+                              <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet" >
+                                  <h2 style="font-weight:normal;font-size:16px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{getNamapasien(klinik.listRegister[klinik.regis+1].idpasien) }}</h2>
+                                  <p class="foroverflow">{{getAlamatpasien(klinik.listRegister[klinik.regis+1].idpasien) }}</p>
+                                  <p class="foroverflow">{{gettelppasien(klinik.listRegister[klinik.regis+1].idpasien) }}</p>
+                                  <div class="btnanext">
+                                      <button class="mdl-button mdl-js-button mdl-button--fab" id="{{klinik.$id}}" ng-click="lompatiantrianberikutnya(klinik)" title="lewati antrian jika calon pasien tidak ada">
+                                    <i class="material-icons">navigate_next</i>
+                                  </button>
+                                    <div class="mdl-tooltip" for="{{klinik.$id}}">
+                                              Lewati Antrian
+                                   </div>
+                                  </div>
+                                
+                              </div>
+                            </div>
+                            
+                        
+                          </a>
+
+                </div>
+
+              <div ng-show="cekisadasokter() && listofKlinik[0] != null && !showsnackbar" id="loadiing" class="watermark">
+               <p style="text-align:center;">Tidak ada dokter yang tersedia.</p>
+             </div>
+
+
+
+               
+ </div>
+<div ng-include src="'templates/registrasi/registrasi_list.html'" ></div>
+<div ng-include src="'templates/registrasi/antrian_reset.html'" ></div>
